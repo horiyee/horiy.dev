@@ -2,6 +2,7 @@ export const pageRoutes = {
   index: "/",
 
   legacy: {
-    markdownPosts: "/markdown_posts",
+    markdownPosts: "/legacy/markdown_posts",
+    bookmarks: "/legacy/bookmarks",
   },
 } as const;

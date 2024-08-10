@@ -15,3 +15,13 @@ export type LegacyCategory = {
   createdAt: Date;
   updatedAt: Date;
 };
+
+export type LegacyBookmark = {
+  id: number;
+  url: string;
+  description: string;
+  createdAt: Date;
+  updatedAt: Date;
+  categoryId: number;
+  categoryName: string;
+};

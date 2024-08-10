@@ -44,8 +44,8 @@ const LegacyMarkdownPostsPage: React.FC = () => {
 
       <section>
         {markdownPosts.map((markdownPost) => (
-          <article>
-            <form key={markdownPost.id}>
+          <article key={markdownPost.id}>
+            <form>
               <fieldset>
                 <label>
                   タイトル
