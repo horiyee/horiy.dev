@@ -45,11 +45,27 @@ const LegacyBookmarksPage: React.FC = () => {
       <h1>ブックマーク</h1>
 
       <button onClick={onClickMigrate}>migrate</button>
-      {/* <section>
+      <section>
         {bookmarks.map((bookmark) => (
           <article key={bookmark.id}>
             <form>
               <fieldset>
+                <label>
+                  createdAt
+                  <input
+                    type="text"
+                    value={bookmark.createdAt.toLocaleDateString()}
+                  />
+                </label>
+
+                <label>
+                  updatedAt
+                  <input
+                    type="text"
+                    value={bookmark.updatedAt.toLocaleDateString()}
+                  />
+                </label>
+
                 <label>
                   URL
                   <input type="text" value={bookmark.url} />
@@ -63,7 +79,7 @@ const LegacyBookmarksPage: React.FC = () => {
             </form>
           </article>
         ))}
-      </section> */}
+      </section>
     </main>
   );
 };
