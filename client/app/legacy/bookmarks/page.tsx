@@ -15,8 +15,8 @@ const LegacyBookmarksPage: React.FC = () => {
             id: 1,
             url: "https://example.com",
             description: "コメント",
-            createdAt: new Date(),
-            updatedAt: new Date(),
+            createdAt: new Date("2021-09-11T08:35:11.915314Z"),
+            updatedAt: new Date("2021-09-11T16:33:36.975124Z"),
             categoryId: 1,
             categoryName: "カテゴリ1",
           },
@@ -52,18 +52,12 @@ const LegacyBookmarksPage: React.FC = () => {
               <fieldset>
                 <label>
                   createdAt
-                  <input
-                    type="text"
-                    value={bookmark.createdAt.toLocaleDateString()}
-                  />
+                  <input type="text" value={bookmark.createdAt.toString()} />
                 </label>
 
                 <label>
                   updatedAt
-                  <input
-                    type="text"
-                    value={bookmark.updatedAt.toLocaleDateString()}
-                  />
+                  <input type="text" value={bookmark.updatedAt.toString()} />
                 </label>
 
                 <label>
