@@ -14,3 +14,5 @@ const LegacyMarkdownPostsPage: React.FC = () => {
     </main>
   );
 };
+
+export default LegacyMarkdownPostsPage;
