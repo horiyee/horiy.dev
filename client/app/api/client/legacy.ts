@@ -1,4 +1,6 @@
-import { legacyApiRoutes } from "../../config/apiRoutes";
+import { getApiEndpoint } from "..";
+import { apiRoutes, legacyApiRoutes } from "../../config/apiRoutes";
+import { LegacyBookmark } from "../../types/legacy";
 import { getLegacyApiEndpoint } from "../legacy";
 import {
   FetchLegacyBookmarksApiResponse,
@@ -36,6 +38,25 @@ export const fetchLegacyBookmarksApiClient = async () => {
   const url = getLegacyApiEndpoint(legacyApiRoutes.bookmarks);
 
   const res = await fetch(url);
+  const json: FetchLegacyBookmarksApiResponse = await res.json();
+
+  return json.bookmarks.map((bookmark) => ({
+    createdAt: new Date(bookmark.createdAt),
+    updatedAt: new Date(bookmark.updatedAt),
+    ...bookmark,
+  }));
+};
+
+export const migrateLegacyBookmarksApiClient = async (
+  bookmarks: FetchLegacyBookmarksApiResponse,
+) => {
+  const url = getApiEndpoint(apiRoutes.legacyBookmarks);
+
+  const res = await fetch(url, {
+    method: "POST",
+    body: JSON.stringify(bookmarks),
+  });
+
   const json: FetchLegacyBookmarksApiResponse = await res.json();
 
   return json.bookmarks.map((bookmark) => ({

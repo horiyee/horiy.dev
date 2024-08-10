@@ -42,7 +42,7 @@ const LegacyMarkdownPostsPage: React.FC = () => {
     <main className="container">
       <h1>マークダウン記事</h1>
 
-      <section>
+      {/* <section>
         {markdownPosts.map((markdownPost) => (
           <article key={markdownPost.id}>
             <form>
@@ -60,7 +60,7 @@ const LegacyMarkdownPostsPage: React.FC = () => {
             </form>
           </article>
         ))}
-      </section>
+      </section> */}
     </main>
   );
 };

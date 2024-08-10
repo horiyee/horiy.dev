@@ -1,8 +1,11 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { LegacyBookmark } from "../../types/legacy";
-import { fetchLegacyBookmarksApiClient } from "../../api/client/legacy";
+import {
+  fetchLegacyBookmarksApiClient,
+  migrateLegacyBookmarksApiClient,
+} from "../../api/client/legacy";
 
 const LegacyBookmarksPage: React.FC = () => {
   const [bookmarks, setBookmarks] = useState<LegacyBookmark[]>(
@@ -25,11 +28,24 @@ const LegacyBookmarksPage: React.FC = () => {
     fetchLegacyBookmarksApiClient().then(setBookmarks).catch(console.error);
   }, []);
 
+  const onClickMigrate = useCallback(
+    async () =>
+      await fetchLegacyBookmarksApiClient()
+        .then(async (bookmarks) => {
+          await migrateLegacyBookmarksApiClient({ bookmarks })
+            .then(console.log)
+            .catch(console.error);
+        })
+        .catch(console.error),
+    [],
+  );
+
   return (
     <main className="container">
       <h1>ブックマーク</h1>
 
-      <section>
+      <button onClick={onClickMigrate}>migrate</button>
+      {/* <section>
         {bookmarks.map((bookmark) => (
           <article key={bookmark.id}>
             <form>
@@ -47,7 +63,7 @@ const LegacyBookmarksPage: React.FC = () => {
             </form>
           </article>
         ))}
-      </section>
+      </section> */}
     </main>
   );
 };
