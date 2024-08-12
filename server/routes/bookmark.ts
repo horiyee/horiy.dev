@@ -15,5 +15,6 @@ const v1r = router.prefix("/v1");
 
 v1r.get("/bookmarks", bookmarkController.index);
 v1r.post("/bookmarks", bookmarkController.create);
+v1r.put("/bookmarks/:id", bookmarkController.update);
 
 export default router;

@@ -43,5 +43,29 @@ export const BookmarkController = (bookmarkService: BookmarkService) => {
     ctx.response.body = { id };
   };
 
-  return { index, create };
+  const update = async (ctx: RouterContext<"/bookmarks/:id">) => {
+    const json: {
+      url: string;
+      createdAt: string;
+      updatedAt: string;
+    } = await ctx.request.body.json().catch((err) => {
+      console.error(`Failed to parse json body: ${err}`);
+
+      ctx.response.status = Status.BadRequest;
+      ctx.response.type = "json";
+
+      ctx.response.body = { error: "Invalid request body" };
+    });
+
+    const { id } = ctx.params;
+    const { url } = json;
+    const createdAt = new Date(json.createdAt);
+    const updatedAt = new Date(json.updatedAt);
+
+    await bookmarkService.update({ id, url, createdAt, updatedAt });
+
+    ctx.response.status = Status.NoContent;
+  };
+
+  return { index, create, update };
 };

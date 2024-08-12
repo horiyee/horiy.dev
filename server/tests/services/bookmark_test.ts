@@ -27,6 +27,18 @@ Deno.test(
 );
 
 Deno.test(
+  "BookmarkService.update() はbookmarkを更新してDeno KVに保存できる",
+  async () => {
+    bookmarks[0].updatedAt = new Date();
+    await bookmarkService.update(bookmarks[0]);
+
+    const results = await bookmarkService.fetchAll();
+    const bookmark = results.find((result) => result.id === bookmarks[0].id);
+    assertEquals(bookmark, bookmarks[0]);
+  },
+);
+
+Deno.test(
   "BookmarkService.fetchAll() はbookmarkをDeno KVから全取得して返す",
   async () => {
     const results = await bookmarkService.fetchAll();
