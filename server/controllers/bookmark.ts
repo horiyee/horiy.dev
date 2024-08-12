@@ -59,6 +59,7 @@ export const BookmarkController = (bookmarkService: BookmarkService) => {
       ctx.response.body = { error: "Invalid request body" };
     });
 
+    console.log(ctx.params);
     const { id } = ctx.params;
     const { url } = json;
     const createdAt = new Date(json.createdAt);
