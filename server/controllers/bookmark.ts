@@ -6,8 +6,6 @@ export const BookmarkController = (bookmarkService: BookmarkService) => {
   const index = async (ctx: RouterContext<"/bookmarks">) => {
     const bookmarks = await bookmarkService.fetchAll();
 
-    console.log(bookmarks);
-
     ctx.response.status = Status.OK;
 
     ctx.response.body = {
