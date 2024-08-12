@@ -40,7 +40,9 @@ export const BookmarkRepository = (kv: Deno.Kv) => {
       }
     }
 
-    return results.bookmarks;
+    return results.bookmarks.sort(
+      (a, b) => b.createdAt.valueOf() - a.createdAt.valueOf(),
+    );
   };
 
   const put = async (bookmark: Bookmark) => {
