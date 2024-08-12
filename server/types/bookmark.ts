@@ -1,5 +1,5 @@
 export type Bookmark = {
-  uuid: string;
+  id: string;
   url: string;
   createdAt: Date;
   updatedAt: Date;
