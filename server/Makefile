@@ -4,4 +4,4 @@ run:
 
 .PHONY: test
 test:
-	deno test --allow-read --allow-write --unstable-kv
+	deno test --allow-env --allow-read --allow-write --unstable-kv
