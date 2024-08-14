@@ -17,6 +17,10 @@ export const BookmarkController = (bookmarkService: BookmarkService) => {
     };
   };
 
+  return { index };
+};
+
+export const BookmarkAdminController = (bookmarkService: BookmarkService) => {
   const create = async (ctx: RouterContext<"/bookmarks">) => {
     const json: {
       url: string;
@@ -67,5 +71,5 @@ export const BookmarkController = (bookmarkService: BookmarkService) => {
     ctx.response.status = Status.NoContent;
   };
 
-  return { index, create, update };
+  return { create, update };
 };

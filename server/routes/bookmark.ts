@@ -1,20 +1,30 @@
-import { BookmarkController } from "../controllers/bookmark.ts";
+import {
+  BookmarkAdminController,
+  BookmarkController,
+} from "../controllers/bookmark.ts";
 import { Router } from "../deps.ts";
 import { BookmarkRepository } from "../repositories/bookmark.ts";
 import { BookmarkService } from "../services/bookmark.ts";
 
-const router = new Router();
+export const BookmarkRoutes = (router: Router, kv: Deno.Kv) => {
+  const bookmarkRepository = BookmarkRepository(kv);
+  const bookmarkService = BookmarkService(bookmarkRepository);
+  const bookmarkController = BookmarkController(bookmarkService);
 
-const kv = await Deno.openKv();
-const bookmarkRepository = BookmarkRepository(kv);
-const bookmarkService = BookmarkService(bookmarkRepository);
+  const v1r = router.prefix("/v1");
 
-const bookmarkController = BookmarkController(bookmarkService);
+  v1r.get("/bookmarks", bookmarkController.index);
 
-const v1r = router.prefix("/v1");
+  return v1r;
+};
 
-v1r.get("/bookmarks", bookmarkController.index);
-v1r.post("/bookmarks", bookmarkController.create);
-v1r.put("/bookmarks/:id", bookmarkController.update);
+export const BookmarkAdminRoutes = (router: Router, kv: Deno.Kv) => {
+  const bookmarkRepository = BookmarkRepository(kv);
+  const bookmarkService = BookmarkService(bookmarkRepository);
+  const bookmarkAdminController = BookmarkAdminController(bookmarkService);
 
-export default router;
+  router.post("/bookmarks", bookmarkAdminController.create);
+  router.put("/bookmarks/:id", bookmarkAdminController.update);
+
+  return router;
+};
