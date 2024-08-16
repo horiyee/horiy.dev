@@ -1,13 +1,13 @@
 "use client";
 
 import { useCallback, useEffect } from "react";
-import { useFirebaseAuth } from "../firebase/hooks/useFirebaseAuth";
 import { useRouter } from "next/navigation";
 import { pageRoutes } from "../config/pageRoutes";
+import { useFirebaseAuth } from "../firebase/hooks/useFirebaseAuth";
 
 const SignInPage: React.FC = () => {
   const router = useRouter();
-  const { user, signIn } = useFirebaseAuth();
+  const { firebaseUser, signIn } = useFirebaseAuth();
 
   const onClick = useCallback(() => {
     signIn().then(() => {
@@ -16,10 +16,10 @@ const SignInPage: React.FC = () => {
   }, [signIn]);
 
   useEffect(() => {
-    if (user !== null) {
+    if (firebaseUser !== null) {
       router.push(pageRoutes.index);
     }
-  }, []);
+  }, [firebaseUser]);
 
   return (
     <section>

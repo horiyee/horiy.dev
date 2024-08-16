@@ -7,20 +7,17 @@ import {
   User,
 } from "firebase/auth";
 import { firebaseApp } from "..";
-import { useRouter } from "next/navigation";
-import { pageRoutes } from "../../config/pageRoutes";
 
 export const useFirebaseAuth = () => {
-  const router = useRouter();
-  const [user, setUser] = useState<User | null>(null);
+  const [firebaseUser, setFirebaseUser] = useState<User | null>(null);
+  const [token, setToken] = useState<string | undefined>(undefined);
 
   const auth = getAuth(firebaseApp);
   const provider = new GoogleAuthProvider();
 
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
-      setUser(user);
-      router.push(pageRoutes.index);
+      setFirebaseUser(user);
     });
   }, []);
 
@@ -29,16 +26,14 @@ export const useFirebaseAuth = () => {
       .then((result) => {
         const credential = GoogleAuthProvider.credentialFromResult(result);
 
-        const {} = credential;
-        const { user } = result;
-
-        setUser(user);
+        const { accessToken } = credential;
+        setToken(accessToken);
       })
       .catch((error) => {
         const {} = error;
         const _ = GoogleAuthProvider.credentialFromError(error);
       });
-  }, [setUser]);
+  }, [setToken]);
 
-  return { user, signIn };
+  return { firebaseUser, token, signIn };
 };

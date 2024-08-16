@@ -1,7 +1,7 @@
 "use client";
 
 import "@picocss/pico";
-import { AuthStateProvider } from "./firebase/AuthStateProvider";
+import { AuthStateProvider } from "./AuthStateProvider";
 
 type Props = {
   children: React.ReactNode;
