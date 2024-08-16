@@ -1,9 +1,7 @@
+"use client";
+
 const Page: React.FC = () => {
-  return (
-    <main className="container">
-      <h1>horiylabs</h1>
-    </main>
-  );
+  return <section></section>;
 };
 
 export default Page;

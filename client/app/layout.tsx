@@ -1,6 +1,7 @@
+"use client";
+
 import "@picocss/pico";
-import Link from "next/link";
-import { pageRoutes } from "./config/pageRoutes";
+import { AuthStateProvider } from "./firebase/AuthStateProvider";
 
 type Props = {
   children: React.ReactNode;
@@ -10,26 +11,13 @@ const RootLayout: React.FC<Props> = ({ children }) => {
   return (
     <html lang="ja">
       <body>
-        <header className="container">
-          <nav>
-            <ul>
-              <li>
-                <strong>horiylabs</strong>
-              </li>
-            </ul>
+        <AuthStateProvider>
+          <header className="container">
+            <h1>horiylabs</h1>
+          </header>
 
-            <ul>
-              <li>
-                <Link href={pageRoutes.notes}>Notes</Link>
-              </li>
-              <li>
-                <Link href="https://www.horiy.me">About Me</Link>
-              </li>
-            </ul>
-          </nav>
-        </header>
-
-        <main className="container">{children}</main>
+          <main className="container">{children}</main>
+        </AuthStateProvider>
       </body>
     </html>
   );

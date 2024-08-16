@@ -3,4 +3,6 @@ export const pageRoutes = {
 
   notes: "/notes",
   bookmarks: "/bookmarks",
+
+  signIn: "/sign_in",
 } as const;
